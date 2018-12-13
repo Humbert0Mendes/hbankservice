@@ -8,5 +8,7 @@ public interface ClientRepository extends MongoRepository<Client, Long> {
 	
 	@Query("{ 'name' : ?0 }")
 	Client findByNameQualquerCoisa(String name);
-
+	
+	@Query("{'id' : ?0 }")
+	Client findByIdClient(String id);
 }

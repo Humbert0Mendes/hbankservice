@@ -18,14 +18,15 @@ public class DataInitilizr implements ApplicationListener<ContextRefreshedEvent>
 	public void onApplicationEvent(ContextRefreshedEvent arg0) {
 		// TODO Auto-generated method stub
 		
-		createClient("Beto", "10000000");
+		createClient("Mendes", "505050500");
 		Client client = clientRepository.findByNameQualquerCoisa("Humberto");
-		System.out.println("Serviço inicializado com sucesso." + client.getName());
+		Client client2 = clientRepository.findByIdClient("5c129a26c8345e19d44f7078");
+		System.out.println("Serviço inicializado com sucesso." + client.getName() + "" + client2.getName());
 	}
 	
 	public void createClient(String name, String cpf) {
 		
-		Client client = new Client(name, cpf);
+		Client client = new Client();
 		clientRepository.save(client);
 	}
 	

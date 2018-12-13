@@ -10,7 +10,7 @@ public class Account {
 	@Id
 	private String id;
 	private Double balance;
-	private long idCustomer;	
+	private String idCustomer;	
 	
 	public String getId() {
 		return id;
@@ -18,10 +18,10 @@ public class Account {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public long getIdCustomer() {
+	public String getIdCustomer() {
 		return idCustomer;
 	}
-	public void setIdCustomer(long idCustomer) {
+	public void setIdCustomer(String idCustomer) {
 		this.idCustomer = idCustomer;
 	}	
 	public Double getBalance() {

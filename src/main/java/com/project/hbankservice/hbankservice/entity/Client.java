@@ -12,12 +12,6 @@ public class Client {
 	private String name;
 	private String cpf;
 	
-	public Client(String name, String cpf){
-		super();
-		this.name = name;
-		this.cpf = cpf;	
-	}
-	
 	public String getId() {
 		return id;
 	}
