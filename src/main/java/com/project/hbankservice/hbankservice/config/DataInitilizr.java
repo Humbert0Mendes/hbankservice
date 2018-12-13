@@ -18,7 +18,7 @@ public class DataInitilizr implements ApplicationListener<ContextRefreshedEvent>
 	public void onApplicationEvent(ContextRefreshedEvent arg0) {
 		// TODO Auto-generated method stub
 		
-		createClient("Humberto", "0000000");
+		createClient("Beto", "10000000");
 		Client client = clientRepository.findByNameQualquerCoisa("Humberto");
 		System.out.println("Serviço inicializado com sucesso." + client.getName());
 	}

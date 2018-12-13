@@ -2,38 +2,35 @@ package com.project.hbankservice.hbankservice.controller;
 
 import java.util.List;
 
-import javax.websocket.ClientEndpoint;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.hbankservice.hbankservice.entity.Client;
-import com.project.hbankservice.hbankservice.repository.ClientRepository;
+import com.project.hbankservice.hbankservice.entity.Account;
+import com.project.hbankservice.hbankservice.repository.AccountRepository;
 
 @RestController
-@RequestMapping("/client")
-public class ClientController {
-	
+@RequestMapping("/account")
+public class AccountController {
+
 	@Autowired
-	private ClientRepository clientRepository;
+	AccountRepository accountRepository;
 	
-	
-	public ClientController(ClientRepository clientRepository) {
-		this.clientRepository = clientRepository;
+	public AccountController(AccountRepository accountRepository) {
+		this.accountRepository = accountRepository;
 	}
 	
 	@RequestMapping(value="", method = RequestMethod.GET)
-	public List<Client> getClients() {
+	public List<Account> getAccounts(){
+		return accountRepository.findAll();
 		
-			return clientRepository.findAll();
 	}
 	
 	@RequestMapping(value="",method = RequestMethod.POST)
-	public Client save(@RequestBody Client client) {
-		return clientRepository.save(client);
+	public Account save(@RequestBody Account account) {
+		return accountRepository.save(account);
 	}
-
+	
 }
