@@ -37,7 +37,7 @@ public class AccountController {
 	@RequestMapping(value="/{id}",method = RequestMethod.POST)
 	public Account save(@RequestBody Account account, @PathVariable String id) {
 			
-		validaIdClient(id);
+		validaIdClient(id, account);
 		return accountRepository.save(account);
 	}
 	
@@ -51,10 +51,20 @@ public class AccountController {
 		return accountRepository.save(account);
 	}
 	
-	public void validaIdClient(String id) {
+	@RequestMapping(value="/{id}/{balance}", method = RequestMethod.PATCH)
+	public Account deposit(@PathVariable String id, @PathVariable Double balance) {
+		
+		Account accountNumber = new Account();
+		accountNumber = accountRepository.findByNumberAccount(id);
+		accountNumber.setBalance( accountNumber.getBalance() + balance );
+		return accountRepository.save(accountNumber);
+	}
+		
+	public void validaIdClient(String id, Account cAccount) {
 		
 		Client client = new Client();
 		client = clientRepository.findByIdClient(id);
+		cAccount.setClient(client);
 		if(client.getId() == null) {
 			System.out.println("Id do usuário informado não existe");
 		}		

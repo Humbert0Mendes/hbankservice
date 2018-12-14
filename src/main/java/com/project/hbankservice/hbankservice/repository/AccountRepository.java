@@ -11,5 +11,5 @@ public interface AccountRepository extends MongoRepository<Account, Long> {
 
 	@Query("{ 'id' : ?0 }")
 	Account findByNumberAccount(String account);
-
+	
 }
