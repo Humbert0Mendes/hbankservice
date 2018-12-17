@@ -3,6 +3,8 @@ package com.project.hbankservice.hbankservice.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,10 +37,14 @@ public class AccountController {
 	}
 	
 	@RequestMapping(value="/{id}",method = RequestMethod.POST)
-	public Account save(@RequestBody Account account, @PathVariable String id) {
+	public ResponseEntity<Account> save(@RequestBody Account account, @PathVariable String id) {
 			
-		validaIdClient(id, account);
-		return accountRepository.save(account);
+		try {
+			validaIdClient(id, account);
+		}catch(Exception e) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+		return new ResponseEntity<>(accountRepository.save(account), HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)
@@ -52,12 +58,13 @@ public class AccountController {
 	}
 	
 	@RequestMapping(value="/{id}/{balance}", method = RequestMethod.PATCH)
-	public Account deposit(@PathVariable String id, @PathVariable Double balance) {
+	public ResponseEntity<Account> deposit(@PathVariable String id, @PathVariable Double balance) {
 		
 		Account accountNumber = new Account();
 		accountNumber = accountRepository.findByNumberAccount(id);
 		accountNumber.setBalance( accountNumber.getBalance() + balance );
-		return accountRepository.save(accountNumber);
+		return new ResponseEntity<>(accountRepository.save(accountNumber), HttpStatus.OK);
+		
 	}
 		
 	public void validaIdClient(String id, Account cAccount) {

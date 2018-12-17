@@ -1,6 +1,7 @@
 package com.project.hbankservice.hbankservice.entity;
 
 import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -9,7 +10,9 @@ public class Client {
 	
 	@Id
 	private String id;
+	@NotNull
 	private String name;
+	@NotNull
 	private String cpf;
 	
 	public String getId() {

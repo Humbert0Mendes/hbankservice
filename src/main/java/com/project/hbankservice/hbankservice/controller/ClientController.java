@@ -3,6 +3,8 @@ package com.project.hbankservice.hbankservice.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,10 +33,10 @@ public class ClientController {
 	}
 	
 	@PostMapping
-	public Client save(@RequestBody Client client) {
-		String teste = "teste";
-		System.out.println(teste);
-		return clientRepository.save(client);
+	public ResponseEntity<Client> save(@RequestBody Client client) {
+		
+		
+		return new ResponseEntity<>(clientRepository.save(client), HttpStatus.CREATED);
 	}
 	
 	@RequestMapping(value="/{id}", method = RequestMethod.DELETE)
