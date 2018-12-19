@@ -1,6 +1,7 @@
 package com.project.hbankservice.hbankservice.entity;
 
 import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -10,6 +11,7 @@ public class Account {
 	@Id
 	private String id;
 	private Double balance;
+	@NotBlank
 	private Client client;
 	
 	public Client getClient() {

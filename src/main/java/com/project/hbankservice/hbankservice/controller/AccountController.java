@@ -2,9 +2,12 @@ package com.project.hbankservice.hbankservice.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -37,7 +40,7 @@ public class AccountController {
 	}
 	
 	@RequestMapping(value="/{id}",method = RequestMethod.POST)
-	public ResponseEntity<Account> save(@RequestBody Account account, @PathVariable String id) {
+	public ResponseEntity<Account> save(@RequestBody @Valid Account account, @PathVariable String id) {
 			
 		try {
 			validaIdClient(id, account);
@@ -58,7 +61,7 @@ public class AccountController {
 	}
 	
 	@RequestMapping(value="/{id}/{balance}", method = RequestMethod.PATCH)
-	public ResponseEntity<Account> deposit(@PathVariable String id, @PathVariable Double balance) {
+	public ResponseEntity<Account> deposit(@PathVariable String id, @PathVariable Double balance) throws MethodArgumentNotValidException {
 		
 		Account accountNumber = new Account();
 		accountNumber = accountRepository.findByNumberAccount(id);
